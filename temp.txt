@@ -1,0 +1,36 @@
+//winebase.html
+<input type="submit" name="addtocart" value="add to cart" class="addtocart" onClick="addtocart('{{object.name}}','{{object.price}}','{{object.size}}','{{object.description}}','{{model.model_name}}')"></input>
+
+			<script language="javascript" type="text/javascript">
+					function addtocart(name, price, size, description, model){
+						$('#cart-page .cart-page-mid ul li:last').after('<li><p class="item-added-to-cart"><img src="{% static '' %}images/'+model+'/'+name+'.jpg">'+name+price+size+description+'</p></li>');
+				};
+			</script>
+
+
+//showwine.html
+<input type="submit" name="addtocart" value="add to cart" class="addtocart" onClick="addtocart('{{object.name}}','{{object.price}}','{{object.size}}','{{object.description}}','{{model_name}}')">
+
+//home.html
+	<div id="viewcart">
+		<div>
+			<span class="viewcart">View Cart</span>
+			<span class="items">Items&nbsp;&nbsp;
+				<span class="items-number">0</span>
+			</span>
+		</div>
+	</div>
+
+
+
+		<div id="cart-page">
+			<div class="cart-page-top"><b>Shopping Cart</b>
+				<span class="close-btn"><img src="{% static 'images/close.png' %}"></span>
+			</div>
+			<div class="cart-page-mid">
+				<ul>
+					<li></li>
+				</ul>
+			</div>
+			<div class="cart-page-foot"></div>
+		</div>

@@ -1,0 +1,36 @@
+{% extends "winebase.html" %}
+{% load static %}
+
+{% block title%}Search Result{% endblock %}
+{% block winesnavname %}You searched for: {{query}}{% endblock %}		
+{% block winesnavlist %}&nbsp;&nbsp;&nbsp;Found {{ wine_num }} wine{{ wines|pluralize }}{% endblock %}
+{% block showwine %} 
+	{% if errors %}
+		<p>
+			<ul>
+				{% for error in errors %}
+					<li class="emptysearcherror"> {{ error }} </li>
+				{% endfor %}
+			</ul>
+		</p>
+	{% else %}
+		{% if wines %}
+			<div id="wines-listing-items">
+				<ul>
+					{% for wine in wines %}
+						<li>
+							<span class="itemname">{{wine.name}} {{wine.size}} {{wine.description}}</span>
+							<a href="/spiritwine/showwine/{{ wine.get_cname }}/{{ wine.name }}/{{ wine.id}}"><img src="{% static '' %}images/{{ wine.get_cname }}/{{ wine.name }}.jpg"></a>
+							<p class="itemprice">&dollar;{{wine.price}}<br>
+								<input type="submit" name="addtocart" value="add to cart" class="addtocart">
+							</p>
+						</li>
+
+					{% endfor %}
+				</ul>
+
+		{% else %} 
+			<p>No wine matched your search.</p>
+		{% endif %}
+	{% endif %}
+{% endblock %}

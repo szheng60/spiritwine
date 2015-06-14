@@ -1,0 +1,5 @@
+{% extends "showwine.html" %}
+{%block title%}Promotion Special{%endblock%}
+{%block oldprice %}
+	<p style="color: red; text-decoration: line-through">Old Price: &nbsp; &nbsp; &nbsp; &dollar;{{object.oldPrice}}</p>
+{% endblock %}

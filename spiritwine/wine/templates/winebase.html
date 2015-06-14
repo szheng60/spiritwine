@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{%load static %}
+
+{% block title %}{% endblock %}
+{% block content %}
+	<div id="wines-page">
+		<div id="wines-nav">
+			<div id="catagory">
+				<h3>{% block winesnavname %}{% endblock %}</h3>
+				{%block winesnavlist%}				
+				{% for class in model_classes %}
+					<span>
+						<a href="/spiritwine/type/{{class.model_name}}">&nbsp;{{ class.model_name }}&nbsp;</a><br>
+					</span>
+				{% endfor %}
+				{%endblock%}
+			</div>
+		</div>
+		<div id="wines-listing">
+			{% block showwine %}
+			<div id="wines-listing-items">
+				<ul>
+				{% for model in model_classes%}
+					{% for object in model.model_object %}
+						<li>
+							<span class="itemname">{{object.name}} {{object.size}} {{object.description}}</span>
+							<a href="/spiritwine/showwine/{{ model.model_name }}/{{ object.name }}/{{object.id}}"><img src="{% static '' %}images/{{ model.model_name }}/{{ object.name }}.jpg"></a>
+							<p class="itemprice">&dollar;{{object.price}}<br></p>
+						</li>
+					{% endfor %}
+				{% endfor %}
+				</ul>
+			</div>
+			{% endblock %}
+
+	    </div>
+	</div>
+{% endblock %}
+			{% block nextpagebutton %}
+			<div id="wines-listing-pagebuttons">
+				<p class="page_box">
+	                <a class="prev">previous</a>
+	                <span class="num">
+	                    <span class="current_page">1</span>
+	                    <span style="padding:0 3px;">/</span>
+	                    <span class="total">1</span>
+	                </span>
+	                <a class="next">next</a>
+	            </p>
+	        </div>
+			{% endblock %}
+

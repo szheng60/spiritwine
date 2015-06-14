@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head> 
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>{% block title %}Welcome to Spirit Wine{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'CSS/style1.css' %}">
+	<link type="text/css" rel="stylesheet" href="{% static 'CSS/wines.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'CSS/red.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'CSS/showwine.css' %}">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script language = "javascript">
+		var STATIC_URL = "{% static '' %}";
+	</script>
+
+	<script type="text/javascript" src = "{% static 'javascripts/promotion.js' %}"></script>
+	<script type="text/javascript" src = "{% static 'javascripts/dropmenu.js' %}"></script>
+	<script type="text/javascript" src = "{% static 'javascripts/winelisting.js' %}"></script>
+	<script type="text/javascript" src = "{% static 'javascripts/search.js' %}"></script>
+	<script type="text/javascript" src = "{% static 'javascripts/viewcart.js' %}"></script>
+	<script type="text/javascript" src = "{% static 'javascripts/jquery-1.11.1.min.js' %}"></script>
+</head>
+{% block extrahead %}
+{% endblock %}
+<body>
+	<div class="container">
+    <div id="nav_top_right">
+        {% if user.is_authenticated %}
+            <p><a href="/logout/">Logout</a></p>
+        {% else %}
+            <p><a href="/login/">Login</a></p>
+        {% endif %}
+    </div>
+		<img id="banner" class="displayed" src="{% static 'images/banner.png' %}">
+		<div id="main">
+			<div id="nav">
+				<ul>
+					<li><a href="/spiritwine/home">HOME</a></li>
+					<li><a href="/spiritwine/catagory/redwine">RED WINE</a>
+						<ul>
+							<li><a href="/spiritwine/type/shiraz">Shiraz</a></li>
+							<li><a href="/spiritwine/type/malbec">Malbec</a></li>
+							<li><a href="/spiritwine/type/pinot noir">Pinot Noir</a></li>
+							<li><a href="/spiritwine/type/french">French</a></li>
+							<li><a href="/spiritwine/type/cabernet sauvignon">Cabernet Sauvignon</a></li>
+							<li><a href="/spiritwine/type/merlot">Merlot</a></li>
+							<li><a href="/spiritwine/type/sirah">Sirah</a></li>
+							<li><a href="/spiritwine/type/grenache">Grenache</a></li>
+							<li><a href="/spiritwine/type/claret">Claret</a></li>
+							<li><a href="/spiritwine/type/vranac">Vranac</a></li>
+							<li><a href="/spiritwine/type/pinotage">Pinotage</a></li>
+							<li><a href="/spiritwine/type/zinfandel">Zinfandel</a></li>
+							<li><a href="/spiritwine/type/burgundy">Burgundy</a></li>
+							<li><a href="/spiritwine/type/cordial">Cordial</a></li>
+						</ul>
+					</li>
+					<li><a href="/spiritwine/catagory/whitewine">WHITE WINE</a>
+						<ul>
+							<li><a href="/spiritwine/type/blanc">Blanc</a></li>
+							<li><a href="/spiritwine/type/bordeaux">Bordeaux</a></li>
+							<li><a href="/spiritwine/type/sangria">Sangria</a></li>
+							<li><a href="/spiritwine/type/pinot grigio">Pinot grigio</a></li>
+							<li><a href="/spiritwine/type/chardonnay">Chardonnay</a></li>
+							<li><a href="/spiritwine/type/riesling">Riesling</a></li>
+						</ul>
+					</li>
+					<li><a href="/spiritwine/catagory/rosewine">ROSE WINE</a></li>
+					<li><a href="/spiritwine/catagory/champagne">CHAMPAGNE</a></li>
+					<li><a href="/spiritwine/catagory/dessertwine">DESSERT WINE</a>	
+						<ul>
+							<li><a href="/spiritwine/type/chocolate">Chocolate</a></li>
+							<li><a href="/spiritwine/type/marsala">Marsala</a></li>
+							<li><a href="/spiritwine/type/plum">Plum</a></li>
+							<li><a href="/spiritwine/type/sherry">Sherry</a></li>
+							<li><a href="/spiritwine/type/moscato">Moscato</a></li>
+							<li><a href="/spiritwine/type/port">Port</a></li>
+							<li><a href="/spiritwine/type/creams">Creams</a></li>
+						</ul>
+					</li>
+					<li><a href="/spiritwine/catagory/liquor">LIQUOR</a>
+						<ul>
+							<li><a href="/spiritwine/type/anise">Anise</a></li>
+							<li><a href="/spiritwine/type/vermouth">Vermouth</a></li>
+							<li><a href="/spiritwine/type/pisco">Pisco</a></li>
+							<li><a href="/spiritwine/type/brandy">Brandy</a></li>
+							<li><a href="/spiritwine/type/gin">Gin</a></li>
+							<li><a href="/spiritwine/type/vodka">Vodka</a></li>
+							<li><a href="/spiritwine/type/rum">Rum</a></li>
+							<li><a href="/spiritwine/type/tequila">Tequila</a></li>
+							<li><a href="/spiritwine/type/whiskey">Whiskey</a></li>
+							<li><a href="/spiritwine/type/cognac">Cognac</a></li>
+							<li><a href="/spiritwine/type/liqueur">Liqueur</a></li>
+							<li><a href="/spiritwine/type/sake">Sake</a></li>
+						</ul>
+					</li>
+					<li>
+						<form id="search" action="/spiritwine/search" methond="get">
+							<input id="searchtext" type="text" name="q" autocomplete="off">
+							<input id="searchsubmit" type="submit" name="findSubmit" value="">		
+						</form>
+					</li>
+				</ul>
+			</div>
+			<div id="content">
+				{% block content %}
+
+				<div id="promotion"></div>
+				<script>load_promotion_images()</script>	
+				<div id= "adList"> 
+					<ul>
+						<li><a href="/spiritwine/promotion/special/1"><img src="{% static 'images/special/1.jpg' %}"></a></li>
+						<li><a href="/spiritwine/promotion/special/2"><img src="{% static 'images/special/2.jpg' %}"></a></li>
+						<li><a href="/spiritwine/promotion/special/3"><img src="{% static 'images/special/3.jpg' %}"></a></li>
+						<li><a href="/spiritwine/promotion/special/4"><img src="{% static 'images/special/4.jpg' %}"></a></li>
+						<li><a href="/spiritwine/promotion/special/5"><img src="{% static 'images/special/5.jpg' %}"></a></li>
+						<li><a href="/spiritwine/promotion/special/6"><img src="{% static 'images/special/6.jpg' %}"></a></li>
+					</ul>
+				</div>
+				{% endblock %}
+			</div>
+			<div>
+				{% block nextpagebutton %}{% endblock %}
+			</div>
+			<div id="companyinfo">
+				<div id="about-us">About Us
+					<ul class="company-subinfo">
+						<li>Huge varieties of wine and liquor</li>
+						<li>Over 30 years in business</li>
+					</ul>
+				</div>
+				<div id="location">Location
+					<div>
+						<a target="_blank" href="https://www.google.com/maps/place/1191+Bay+St/@40.614317,-74.065974,17z/data=!3m1!4b1!4m2!3m1!1s0x89c24faf5b33d4eb:0x70d20f6612f00d8a"><img src="{% static 'images/map.jpg' %}"></a>
+					</div>
+					<div class="company-subinfo">
+						1191 Bay St<br>
+						Corner of Bay st &amp; Hyland Blvd<br>
+						State Island, NY 10305
+					</div>
+				</div>
+				<div id="contact-us">Contact Us
+					<div class="company-subinfo">
+						Phone: 718-447-6343<br>
+						Fax: <br>
+					</div><br>
+					<div id="operation-hour">Hours of Operation</div>
+						<div class="company-subinfo">
+							Mon - Sat: <br>
+							Sunday <br>
+						</div>
+				</div>
+				<div id="follow-us">Follow Us
+					<ul>
+						<li><a target="_blank" href="http://www.facebook.com/spiritwine"><img src="{% static 'images/facebook.png' %}" alt="facebook"></a></li>
+						<li><a target="_blank" href="http://twitter.com/spiritwine"><img src="{% static 'images/twitter.png' %}" alt="twitter"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div><p id="foot">Copyright &copy; Spirit Wine, Inc., New York. All right reserved.</p></div>
+	</div>
+</body>
+
+</html>

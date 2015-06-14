@@ -1,0 +1,58 @@
+{%extends "winebase.html"%}
+{% load static %}
+{%block title%}{{object.name}}{%endblock%}
+{%block winesnavname%}
+	<p>{{object.name}}</p>
+	<p style="font-size: 14px;text-decoration:underline;"> {{object.region}}</p>
+{%endblock%}
+{%block winesnavlist%}{%endblock%}
+{%block showwine%}
+	<div id="showwineitem">
+		<div id="showitemimage">
+			<img src="{% static '' %}images/{{model_name}}/{{object.name}}.jpg"><br>
+			<p style="position: relative; left: 40px">Image for demo only</p>
+		</div>
+		<div id="showitemdetail">
+			<h3><p class="showitemdetail-name">{{object.name}}</p>
+				<p><hr noshade size=3></p>
+				<span>{{object.produced_date}} points</span>
+				<p class="showitemdetail-description">{{object.description}} &bull; {{object.size}}</p>
+				<p><hr noshade size=3></p>
+				{% block oldprice %}{% endblock %}
+				<form>
+					<p class="showitemdetail-price">Price: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+						&dollar;<lable id="showitemprice">{{object.price}}</lable> 
+					</p>
+					<select id="selectquantitynumber" name="selectquantity">
+						<option value="1">Bottle --- &dollar;{{object.price}}</option>
+						<option value="6">Bottle(6) --- &dollar;{{object.price}}</option>
+						<option value="12">Bottle(12) --- &dollar;{{object.price}}</option>
+					</select>	
+				</form>
+			</h3>
+			<br><br><br><p><hr noshade size=3></p>
+		</div>
+		<script>
+			var dropdownlist = document.getElementById('selectquantitynumber');
+			var quantitynumber = 0;
+			var totalprice = 0;
+			$('#selectquantitynumber').change(function(){
+				quantitynumber = dropdownlist.value;
+				totalprice = quantitynumber * {{object.price}};
+				document.getElementById('showitemprice').innerHTML = totalprice.toFixed(2);
+			})
+			for (var i = 0; i < dropdownlist.options.length; i++)
+			{
+				quantitynumber = dropdownlist.options[i].value;
+				totalprice = quantitynumber * {{object.price}};
+				dropdownlist.options[i].text= "Bottle(" + quantitynumber + ") --- $" + totalprice.toFixed(2);
+			}
+		</script>
+	</div>
+	<div id="disclaimer">
+		<br><p><em>&nbsp;&nbsp;&nbsp;&nbsp;All the prices are for demostration only. There is no requirement for payment or any sort.</em><br>
+		<em>&nbsp;&nbsp;&nbsp;&nbsp;This is not final sale or delivery sale. The store reserves all the rights for any possible price alternation.<em></p>
+	</div>
+
+{%endblock%}
+{% block nextpagebutton %}{% endblock %}
